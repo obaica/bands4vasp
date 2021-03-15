@@ -2,7 +2,7 @@
 
 ***
 
-## About bands4vasp
+## What is bands4vasp?
 
 ***
 
