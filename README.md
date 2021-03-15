@@ -2,20 +2,20 @@
 
 ***
 
-## About bands4VASP
+## About bands4vasp
 
 ***
 
-The **bands4VASP** post-processing package is exclusively build for the analysis and visualisation of bandstructure- and especially unfolding calculations from VASP.
+The **bands4vasp** post-processing package is exclusively build for the analysis and visualisation of bandstructure- and especially unfolding calculations from VASP.
 It uses the energy values, the k-space coordinates and optionally the orbital- and blochcharacters from the **PROCAR**, **PROCAR.prim** or **PRJCAR** files.
 Also a lattice is needed to project the k-points on the Fermi level and calculate the Fermi vectors.
 The reciprocal lattice of the primitive cell, given in the **PRJCAR** file, is the prefered lattice.
 If the **PRJCAR** file is not present, the lattice given in the **POSCAR** file will be taken.
 For a correct bandstructure of an unfolding calculation it is necesarry to have at least one **PRJCAR** file in your dataset.
 All energy values will be represented with respect to the fermi-energy, where the fermi-energy is taken from the **OUTCAR** file of the self-consistent calculation from the structure or can be entered by the user.
-**bands4VASP** calculates the roots at the fermi-level for all kind of bands. All this information are visualized in several plots.
-With a dataset of line calculations in a surface of the Brillouin zone, one can **bands4VASP** let calculate the fermiroots and than let it project onto that surface.
-**bands4VASP** is written in _FORTRAN_, it uses _Gnuplot_ for the visualisation and a _Bash-environment_ which brings all together.
+**bands4vasp** calculates the roots at the fermi-level for all kind of bands. All this information are visualized in several plots.
+With a dataset of line calculations in a surface of the Brillouin zone, one can **bands4vasp** let calculate the fermiroots and than let it project onto that surface.
+**bands4vasp** is written in _FORTRAN_, it uses _Gnuplot_ for the visualisation and a _Bash-environment_ which brings all together.
 
 ***
 
@@ -29,7 +29,7 @@ With a dataset of line calculations in a surface of the Brillouin zone, one can 
 ---
 
 
-There are 3 typs of files bands4VASP can handle:
+There are 3 typs of files bands4vasp can handle:
 
 * The **PRJCAR** file is only present if one had activate the unfolding procedure in VASP and therefore every energy value can be associated with a so called Bloch-character. Orbital characters are absent in the PRJCAR file and will be as well for all the derived values and plots form this files.
 
@@ -37,7 +37,7 @@ There are 3 typs of files bands4VASP can handle:
 
 * The **PROCAR.prim** file containes both, the Bloch- and the orbital character.
 
-### bands4VASP output files
+### bands4vasp output files
 
 ---
 
@@ -64,10 +64,10 @@ bands4VASP provides a lot of different information, which it derives from the VA
 _*These plots have also a fine version inbetween the energy interval [-EDELTA2;EDELTA2], which indicates the extension .fine._
 
 
-### INPAR - The bands4VASP input file
+### INPAR - The bands4vasp input file
 
-Bands4VASP needs a file for all input parameters. This file is called **INPAR**.
-If you run bands4VASP and no INPAR file is present in the current directory, bands4VASP will copy the default INPAR file to your directory.
+Bands4vasp needs a file for all input parameters. This file is called **INPAR**.
+If you run bands4vasp and no INPAR file is present in the current directory, bands4vasp will copy the default INPAR file to your directory.
 Some parameters have only an effect, if a specific VASP filetype was choosen, because not every information is stored in all of the 3 files.
 
 #### General control parameters
