@@ -1,0 +1,52 @@
+Usage: ebs [OPTION] ... [file]
+Options:
+  --help                  Display this information.
+  --info                  The same as --help.
+  --inpar                 copy the default INPAR file to your current directory.
+  --fermi [file]          make a fermisurface calculation.
+  --pre-lines $1 $2       prepare a multi directory with the k-points in
+                          KPOINTS file after the flag '#makepath'.
+                          $1 = directory for the prepared VASP files
+                          $2 = name for the multidirectory
+  --pre-circle $1 $2 $3   prepare a multi directory with a circle given in
+                          the KPOINTS file after the flag '#makepath'.
+                          There should be 3 points:
+                          1.The first point is the center of the circle
+                          2.The second point is the start point
+                          3.The third point is the end point
+                          It calculates the points along the circle in
+                          a mathematically positv sense.
+                          The calculation will be done as a line from
+                          the given center to each calculated point.
+                          $1 = directory for the prepared VASP files
+                          $2 = number of equidistant points on the circle
+                          $3 = name for the multidirectory
+  --pre-surface $1 $2 $3  prepare a multi directory with a surface of lines given
+                          in the KPOINTS file after the flag '#makepath'.
+                          There should be 3 points:
+                          1.The first corner of the surface where the calculation starts
+                          2.The second corner of the surface, which defines with the first
+                            given point the direction of the line calculations
+                          3.The third corner of the surface, which defines with the 2nd
+                            corner the direction of the translation of the lines
+                          $1 = directory for the prepared VASP files
+                          $2 = number of equidistant lines on the surface
+                          $3 = name for the multidirectory
+
+
+Passing files:
+ There are 3 ways to pass files to band4VASP
+  
+ -Single path:   If you only have one path of calculation data you can go eather in the directory
+                 and just execute band4VASP or you can pass the directory in which the data are stored.
+                 => ebs "directory"
+
+ -Multi path:   If you have more than one path (e.g. Fermisurface) you should named it equaly dispite
+                a number in the name, or simply use the --pre options of band4VASP. You can start
+                the multipath calculation by passing a %-sign as a placeholder for numbers. If we have:
+                "1fermi 2fermi 3fermi 4fermi 5fermi 6fermi 7fermi ..." we can simply enter:
+                ebs %fermi
+                
+ -Fermisurface: For a Fermisurface you pass the multi path structure with a %-sign as discribed befor.
+                You only add the option --fermi to the command:
+                ebs --fermi %fermi
