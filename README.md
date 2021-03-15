@@ -72,8 +72,122 @@ Some parameters have only an effect, if a specific VASP filetype was choosen, be
 
 #### General control parameters
 
+* **ROOTSCALC** - If set to .FALSE. no Fermi vectors will be calculated.
+* **SKIPKPOINT** - If there is one integer number n, bands4vasp ignores the first n k-points of every file. If 2 integer seperated by a minus n-m, the k-points n up to m will be ignored. For 0 no k-point is skipped.
+* **SELECTION** Select a specific Ion and the associated orbital characters, in order of appearence in PROCAR[.prim] file. If 2 integer seperated by a minus n-m are given only the orbital characters of ion n up to m is taken.
 * **EDELTA1** - energy interval (y-axis) [-EDELTA1;EDELTA1] for the unfiltered plots EBSbloch, EBSorbit, EBSbloch.spec and Bandindexplot.
 * **EDELTA2** - energy interval (y-axis) [-EDELTA2;EDELTA2] for the filtered plots.
 * **EDIF**  - Energy diffusion from the unfolding calculation. The energy interval in between it compresses the points to one avaraged point.
-* **BAVERAGE** - If this is set to .TRUE. the weighted average of the blochcharacter is calculated, else the values will summed up.
-* **OAVERAGE** - If this is set to .TRUE. the weighted average of the orbitalcharacter is calculated, else the values were summed up.
+* **BAVERAGE** - If this is set to .TRUE. the weighted average of the Blochcharacter is calculated, else the values will summed up.
+* **OAVERAGE** - If this is set to .TRUE. the weighted average of the orbital character is calculated, else the values were summed up.
+* **EGAP** - This has to be a real value and describes the maximal energy difference for two points to belong to the same effective band.
+* **THRESHOLD** - Sets the minimal Bloch character value for which a point will be accepted. One can also set it to a negative value, than every point of the original file(s) is taken.
+* **DBLOCH** - This has to be a real value and describes the maximal Bloch character difference for two points to belong to the same effective band.
+* **GRADIENTD** - Gives the maximal gradient deviation.
+* **NPOINTS** - Number of points which will be take account to the fermiroots calculation for each side.
+* **LPOLY** - If set to .TRUE. a polynomial interpolation with the degree 2*NPOINTS will be used for the fermiroots calculation.
+If set to $.FALSE.$ a linear regression will be used for the fermiroots calcualtion.
+* **REGULARPREC** - This has to be a real value and sets the accuracy for the Regular falsi method, which is used to calculate the k-distance of the fermiroots.
+* **PLOTORB** - Sets the Orbital, which is shown in the EBSorbit plots.
+It has to be an integer which corresponds to the order of the orbitals in the PROCAR[.prim] file. If PLOTORB is set to 0 all orbitalplots are printed in EBSorbit_ALL.
+* **ODISTINCT** - It has to be a real value and describes the maximal orbital character difference for two points to belong to the same effective band.
+* **BNDDIFF** - If this is set to .TRUE. the algorythm takes also points with different Bandindex for the fermiroots calculation.
+For unfolding data it is recommend to set it to .TRUE. and for no-folding data set it to .FALSE..
+* **KAPPANORM** - If this is set to .TRUE. the Bloch character for each band and K-POINT (SC) get normed respectively.
+
+
+#### Fermisurface
+
+The parameters in the following section are only considered if a fermisurface calculation is done, by passing the option _--fermi_.
+
+* **SYMPOINT1/SYMPOINT2** - These are the symmetry points for the resulting fermisurface* plots. If both are commented out (\#) the fermisurface* plots will only show the calculated roots projected on the surface in were the calculations were done. If the SYMPOINT1 set to a 3d-vector, where the values have to be seperated by one space ("SYMPOINT1 = 0.0 0.0 0.0"), the calculated values will be copied to the rotaded positions at rotation angles 90°, 180° and 270°.
+If SYMPOINT2 is also set to a vector, the calculated roots will axial reflected with the mirror axis defined by SYMPOINT1 and SYMPOINT2.
+* **SYMREC** - If this is set to .TRUE. the coordinates of the symmetry points SYMPOINT1 and SYMPOINT2 from above, are interpreted as reciprocal coordinates. If it is set to .FALSE. the coordinates are interpreted as cartesian.
+* **FGRID** - An equidistant grid is produced for the fermisurface plot. FGRID can set to the number of meshes. If set to 0 no grid will be shown in the plot.
+
+#### Spectral function
+
+* **SPECFUN**  - If this is set to .TRUE. the spectral function plot is activated.
+* **SIGMA** - This value defines the smearing of the deltafunction in the spectral function.
+* **SPECDELTA** - The smaller this real value (in eV) is, the higher is the number of energy points per k-point for which the spectral function is evaluated, which results in a higher resolution, more computing capacity and larger *.specfun* files.
+* **SLIMSPEC** - If this is set to .TRUE. it will only write data where the Bloch character is larger than 0. This can save memory, because of smaller *.specfun* files. Otherwise every value from every energy step will be written in the *.specfun* files.
+
+#### Plot specific options
+
+* **MAKEPLOTS** - If set to .TRUE. bands4vasp produces the plots, if set to .FALSE. no plots will be produced.
+* **FILEFORMAT** - One can chose the format of the file from {pdf, png, epslatex, cairolatex, eps (default)}.
+* **PLOTSIZE** - One can give an explicite size 'x, y' for the plots. The coordinates have to be seperated by a ','. Values between 0 and 1 gives the ratio, respectively. Values greater than 1 are interpreted as pixels. One can also add units as 'cm', but in general the possible unit depends on the format (see gnuplot documentation). If commented (\#) gnuplot sets a default size (recommended).
+* **BANDINDEXPLOT** - If this is set to .TRUE. the Bandindexplot is created.
+* **LEAVEPLOTDATA** - If this is set to .TRUE., bands4vasp leaves all needed files to generate the plots:
+- The Gnuplot file 'autognuplotEBS.gnu', which creates all plots.
+- The data files 'autoplotdata$$$', where the dollar signs are placeholder for numbers.
+
+#### Visual parameters
+
+* **PATHPOINTS** - Here one can write the letters for the lattice symmetry points in the Brillouin zone. Especially for multipath calculations this can be a great benefit. A '/' infront of the letter prints the greek version of the letter. If this option is commented (\#). the  k-distance will be shown instead.
+* **LFITPOINTS** - If this is set to .TRUE. the fitpoints which were used to calculate the fermiroots are shown in the plots.
+* **LLINES** - If this is set to .TRUE. the graph, derived from the fitpoints ether with linear regression or polynomial interpolation, will be shown in the plots.
+* **LROOTS** - If this is set to .TRUE. the fermiroots will be shown in the plots and if there are no roots the energygap will be shown.
+* **PSFAC** - With that factor one can change the pointssize in the plots => pointsize=original_pointsize * PSFAC
+* **BCOLOURS** - These have to be 2 colors seperated by space, the first one is the color for Bloch character equals to zero and the second one is the color for the maximal value. For a list of all accesable colornames open the terminal and enter: _gnuplot -e 'show palette colornames'_
+* **OCOLOURS** - This is the same as for BCOLOURS above, with the different that this colors are for the orbital plots.
+* **BACKCOLOUR** - This is the background color of the plots.
+
+## Usage
+
+Usage: bands4vasp [OPTION] ... [file]\
+Options:\
+  --help                  Display this information.\
+  --info                  The same as --help.\
+  --inpar                 copy the default INPAR file to your current directory.\
+  --fermi [file]          make a fermisurface calculation.\
+  --pre-lines $1 $2       prepare a multi directory with the k-points in\
+                          KPOINTS file after the flag '#makepath'.\
+                          $1 = directory for the prepared VASP files\
+                          $2 = name for the multidirectory\
+  --pre-circle $1 $2 $3   prepare a multi directory with a circle given in\
+                          the KPOINTS file after the flag '#makepath'.\
+                          There should be 3 points:\
+                          1.The first point is the center of the circle\
+                          2.The second point is the start point\
+                          3.The third point is the end point\
+                          It calculates the points along the circle in\
+                          a mathematically positv sense.\
+                          The calculation will be done as a line from\
+                          the given center to each calculated point.\
+                          $1 = directory for the prepared VASP files\
+                          $2 = number of equidistant points on the circle\
+                          $3 = name for the multidirectory\
+  --pre-surface $1 $2 $3  prepare a multi directory with a surface of lines given\
+                          in the KPOINTS file after the flag '#makepath'.\
+                          There should be 3 points:\
+                          1.The first corner of the surface where the calculation starts\
+                          2.The second corner of the surface, which defines with the first\
+                            given point the direction of the line calculations\
+                          3.The third corner of the surface, which defines with the 2nd\
+                            corner the direction of the translation of the lines\
+                          $1 = directory for the prepared VASP files\
+                          $2 = number of equidistant lines on the surface\
+                          $3 = name for the multidirectory\
+
+
+Passing files:\
+ There are 3 ways to pass files to band4vasp\
+
+ -Single path:   If you only have one path of calculation data you can go eather in the directory
+                 and just execute band4VASP or you can pass the directory in which the data are stored.
+                 => bands4vasp "directory"
+
+ -Multi path:   If you have more than one path (e.g. Fermisurface) you should named it equaly dispite
+                a number in the name, or simply use the --pre options of band4VASP. You can start
+                the multipath calculation by passing a %-sign as a placeholder for numbers. If we have:
+                "1fermi 2fermi 3fermi 4fermi 5fermi 6fermi 7fermi ..." we can simply enter:
+                bands4vasp %fermi
+
+ -Fermisurface: For a Fermisurface you pass the multi path structure with a %-sign as discribed befor.
+                You only add the option --fermi to the command:
+                bands4vasp --fermi %fermi
+
+
+
+
