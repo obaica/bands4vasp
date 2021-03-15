@@ -135,59 +135,55 @@ If SYMPOINT2 is also set to a vector, the calculated roots will axial reflected 
 
 ## Usage
 
-Usage: bands4vasp [OPTION] ... [file]\
-Options:\
-  --help                  Display this information.\
-  --info                  The same as --help.\
-  --inpar                 copy the default INPAR file to your current directory.\
-  --fermi [file]          make a fermisurface calculation.\
-  --pre-lines $1 $2       prepare a multi directory with the k-points in\
-                          KPOINTS file after the flag '#makepath'.\
-                          $1 = directory for the prepared VASP files\
-                          $2 = name for the multidirectory\
-  --pre-circle $1 $2 $3   prepare a multi directory with a circle given in\
-                          the KPOINTS file after the flag '#makepath'.\
-                          There should be 3 points:\
-                          1.The first point is the center of the circle\
-                          2.The second point is the start point\
-                          3.The third point is the end point\
-                          It calculates the points along the circle in\
-                          a mathematically positv sense.\
-                          The calculation will be done as a line from\
-                          the given center to each calculated point.\
-                          $1 = directory for the prepared VASP files\
-                          $2 = number of equidistant points on the circle\
-                          $3 = name for the multidirectory\
-  --pre-surface $1 $2 $3  prepare a multi directory with a surface of lines given\
-                          in the KPOINTS file after the flag '#makepath'.\
-                          There should be 3 points:\
-                          1.The first corner of the surface where the calculation starts\
-                          2.The second corner of the surface, which defines with the first\
-                            given point the direction of the line calculations\
-                          3.The third corner of the surface, which defines with the 2nd\
-                            corner the direction of the translation of the lines\
-                          $1 = directory for the prepared VASP files\
-                          $2 = number of equidistant lines on the surface\
-                          $3 = name for the multidirectory\
+Usage: bands4vasp [OPTION] ... [file]<br/>
+Options:<br/>
+  --help                  Display this information.<br/>
+  --info                  The same as --help.<br/>
+  --inpar                 copy the default INPAR file to your current directory.<br/>
+  --fermi [file]          make a fermisurface calculation.<br/>
+  --pre-lines $1 $2       prepare a multi directory with the k-points in<br/>
+                          KPOINTS file after the flag '#makepath'.<br/>
+                          $1 = directory for the prepared VASP files<br/>
+                          $2 = name for the multidirectory<br/>
+  --pre-circle $1 $2 $3   prepare a multi directory with a circle given in<br/>
+                          the KPOINTS file after the flag '#makepath'.<br/>
+                          There should be 3 points:<br/>
+                          1.The first point is the center of the circle<br/>
+                          2.The second point is the start point<br/>
+                          3.The third point is the end point<br/>
+                          It calculates the points along the circle in<br/>
+                          a mathematically positv sense.<br/>
+                          The calculation will be done as a line from<br/>
+                          the given center to each calculated point.<br/>
+                          $1 = directory for the prepared VASP files<br/>
+                          $2 = number of equidistant points on the circle<br/>
+                          $3 = name for the multidirectory<br/>
+  --pre-surface $1 $2 $3  prepare a multi directory with a surface of lines given<br/>
+                          in the KPOINTS file after the flag '#makepath'.<br/>
+                          There should be 3 points:<br/>
+                          1.The first corner of the surface where the calculation starts<br/>
+                          2.The second corner of the surface, which defines with the first<br/>
+                            given point the direction of the line calculations<br/>
+                          3.The third corner of the surface, which defines with the 2nd<br/>
+                            corner the direction of the translation of the lines<br/>
+                          $1 = directory for the prepared VASP files<br/>
+                          $2 = number of equidistant lines on the surface<br/>
+                          $3 = name for the multidirectory<br/>
 
 
-Passing files:\
- There are 3 ways to pass files to band4vasp\
+Passing files:<br/>
+ There are 3 ways to pass files to band4vasp<br/>
 
- -Single path:   If you only have one path of calculation data you can go eather in the directory
-                 and just execute band4VASP or you can pass the directory in which the data are stored.
-                 => bands4vasp "directory"
+ -Single path:   If you only have one path of calculation data you can go eather in the directory<br/>
+                 and just execute band4VASP or you can pass the directory in which the data are stored.<br/>
+                 => bands4vasp "directory"<br/>
 
- -Multi path:   If you have more than one path (e.g. Fermisurface) you should named it equaly dispite
-                a number in the name, or simply use the --pre options of band4VASP. You can start
-                the multipath calculation by passing a %-sign as a placeholder for numbers. If we have:
-                "1fermi 2fermi 3fermi 4fermi 5fermi 6fermi 7fermi ..." we can simply enter:
-                bands4vasp %fermi
+ -Multi path:   If you have more than one path (e.g. Fermisurface) you should named it equaly dispite<br/>
+                a number in the name, or simply use the --pre options of band4VASP. You can start<br/>
+                the multipath calculation by passing a %-sign as a placeholder for numbers. If we have:<br/>
+                "1fermi 2fermi 3fermi 4fermi 5fermi 6fermi 7fermi ..." we can simply enter:<br/>
+                bands4vasp %fermi<br/>
 
- -Fermisurface: For a Fermisurface you pass the multi path structure with a %-sign as discribed befor.
-                You only add the option --fermi to the command:
-                bands4vasp --fermi %fermi
-
-
-
-
+ -Fermisurface: For a Fermisurface you pass the multi path structure with a %-sign as discribed befor.<br/>
+                You only add the option --fermi to the command:<br/>
+                bands4vasp --fermi %fermi<br/>
