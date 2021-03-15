@@ -24,7 +24,7 @@ With a dataset of line calculations in a surface of the Brillouin zone, one can 
 ***
 
 
-### VASP-file (input)
+### VASP-files (input)
 
 ---
 
